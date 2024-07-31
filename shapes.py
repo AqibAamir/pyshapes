@@ -61,3 +61,61 @@ def draw_random_pattern(t, num_shapes):
 def user_input_pattern(t):
     pattern = turtle.textinput("Pattern Input", "Enter pattern (square/circle/star/hexagon/triangle/spiral): ")
     size = int(turtle.numinput("Size Input", "Enter size: ", minval=10, maxval=200))
+    if pattern == "square":
+        draw_square(t, size)
+    elif pattern == "circle":
+        draw_circle(t, size)
+    elif pattern == "star":
+        draw_star(t, size)
+    elif pattern == "hexagon":
+        draw_hexagon(t, size)
+    elif pattern == "triangle":
+        draw_triangle(t, size)
+    elif pattern == "spiral":
+        angle = int(turtle.numinput("Angle Input", "Enter angle for spiral: ", minval=10, maxval=360))
+        draw_spiral(t, size, angle)
+
+def draw_mandala(t, num_shapes, size):
+    colors = ["red", "green", "blue", "orange", "purple", "pink", "yellow", "cyan"]
+    for i in range(num_shapes):
+        t.color(random.choice(colors))
+        draw_circle(t, size)
+        t.right(360 / num_shapes)
+
+def draw_flower(t, petal_count, petal_size):
+    colors = ["red", "green", "blue", "orange", "purple", "pink", "yellow", "cyan"]
+    for _ in range(petal_count):
+        t.color(random.choice(colors))
+        t.circle(petal_size, 60)
+        t.left(120)
+        t.circle(petal_size, 60)
+        t.left(60)
+
+def draw_sunburst(t, ray_count, ray_length):
+    colors = ["red", "green", "blue", "orange", "purple", "pink", "yellow", "cyan"]
+    for _ in range(ray_count):
+        t.color(random.choice(colors))
+        t.forward(ray_length)
+        t.backward(ray_length)
+        t.right(360 / ray_count)
+
+def draw_sine_wave(t, amplitude, frequency, length):
+    colors = ["red", "green", "blue", "orange", "purple", "pink", "yellow", "cyan"]
+    t.color(random.choice(colors))
+    for x in range(length):
+        y = amplitude * turtle.sin(frequency * x)
+        t.goto(x - length // 2, y)
+
+def draw_complex_pattern(t):
+    draw_random_pattern(t, 5)
+    user_input_pattern(t)
+    draw_mandala(t, 12, 50)
+    draw_flower(t, 8, 100)
+    draw_sunburst(t, 20, 150)
+    draw_sine_wave(t, 100, 0.1, 500)
+
+def setup_turtle():
+    t = turtle.Turtle()
+    t.speed(0)
+    t.width(2)
+    return t
