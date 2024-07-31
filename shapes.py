@@ -25,7 +25,7 @@ def draw_triangle(t, size):
         t.right(120)
 
 def draw_spiral(t, line_length, angle):
-    colors = ["red", "green", "blue", "orange", "purple", "pink", "yellow", "cyan"]
+    colors = ["red", "green", "blue", "Orange", "purple", "pink", "yellow", "cyan"]
     for i in range(line_length):
         t.color(random.choice(colors))
         t.forward(i)
