@@ -119,3 +119,57 @@ def setup_turtle():
     t.speed(0)
     t.width(2)
     return t
+
+def draw_grid(t, step):
+    t.color("gray")
+    for x in range(-200, 201, step):
+        t.penup()
+        t.goto(x, -200)
+        t.pendown()
+        t.goto(x, 200)
+    for y in range(-200, 201, step):
+        t.penup()
+        t.goto(-200, y)
+        t.pendown()
+        t.goto(200, y)
+
+def draw_random_lines(t, num_lines):
+    for _ in range(num_lines):
+        x1 = random.randint(-200, 200)
+        y1 = random.randint(-200, 200)
+        x2 = random.randint(-200, 200)
+        y2 = random.randint(-200, 200)
+        t.penup()
+        t.goto(x1, y1)
+        t.pendown()
+        t.goto(x2, y2)
+
+def draw_concentric_circles(t, num_circles, radius_step):
+    colors = ["red", "green", "blue", "orange", "purple", "pink", "yellow", "cyan"]
+    for i in range(num_circles):
+        t.color(random.choice(colors))
+        draw_circle(t, radius_step * i)
+
+def draw_rainbow(t, radius):
+    colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
+    for color in colors:
+        t.color(color)
+        t.begin_fill()
+        draw_circle(t, radius)
+        t.end_fill()
+        radius -= 10
+
+def draw_lsystem(t, axiom, rules, iterations, angle, length):
+    stack = []
+    for _ in range(iterations):
+        new_axiom = ""
+        for char in axiom:
+            new_axiom += rules.get(char, char)
+        axiom = new_axiom
+    for char in axiom:
+        if char == "F":
+            t.forward(length)
+        elif char == "+":
+            t.right(angle)
+        elif char == "-":
+            t.left(angle)
