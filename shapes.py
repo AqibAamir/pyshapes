@@ -220,3 +220,41 @@ def main():
     screen = turtle.Screen()
     screen.bgcolor("black")
     screen.title("Colorful Turtle Patterns")
+
+
+    t = setup_turtle()
+
+    num_squares = 36
+    size_increment = 10
+
+    for _ in range(5):
+        draw_pattern(t, num_squares, size_increment)
+        t.right(10)
+
+    draw_grid(t, 50)
+    draw_random_lines(t, 10)
+    draw_concentric_circles(t, 10, 20)
+    draw_rainbow(t, 100)
+
+    axiom = "F"
+    rules = {"F": "F+F-F-F+F"}
+    draw_lsystem(t, axiom, rules, 4, 90, 5)
+
+    draw_tree(t, 100, 5)
+    t.penup()
+    t.goto(-150, 0)
+    t.pendown()
+    draw_koch_snowflake(t, 300, 4)
+
+    t.penup()
+    t.goto(150, -200)
+    t.pendown()
+    draw_fractal_tree(t, 100, 30, 5)
+
+    draw_complex_pattern(t)
+
+    turtle.done()
+
+if __name__ == "__main__":
+    main()
+
