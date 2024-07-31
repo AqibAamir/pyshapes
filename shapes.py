@@ -173,3 +173,50 @@ def draw_lsystem(t, axiom, rules, iterations, angle, length):
             t.right(angle)
         elif char == "-":
             t.left(angle)
+
+elif char == "[":
+            stack.append((t.position(), t.heading()))
+        elif char == "]":
+            position, heading = stack.pop()
+            t.penup()
+            t.goto(position)
+            t.setheading(heading)
+            t.pendown()
+
+def draw_tree(t, branch_length, level):
+    if level > 0:
+        t.forward(branch_length)
+        t.right(20)
+        draw_tree(t, branch_length - 10, level - 1)
+        t.left(40)
+        draw_tree(t, branch_length - 10, level - 1)
+        t.right(20)
+        t.backward(branch_length)
+
+def draw_koch_snowflake(t, length, level):
+    if level == 0:
+        t.forward(length)
+    else:
+        length /= 3.0
+        draw_koch_snowflake(t, length, level-1)
+        t.left(60)
+        draw_koch_snowflake(t, length, level-1)
+        t.right(120)
+        draw_koch_snowflake(t, length, level-1)
+        t.left(60)
+        draw_koch_snowflake(t, length, level-1)
+
+def draw_fractal_tree(t, branch_length, angle, level):
+    if level > 0:
+        t.forward(branch_length)
+        t.left(angle)
+        draw_fractal_tree(t, branch_length * 0.67, angle, level - 1)
+        t.right(angle * 2)
+        draw_fractal_tree(t, branch_length * 0.67, angle, level - 1)
+        t.left(angle)
+        t.backward(branch_length)
+
+def main():
+    screen = turtle.Screen()
+    screen.bgcolor("black")
+    screen.title("Colorful Turtle Patterns")
