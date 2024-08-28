@@ -174,7 +174,7 @@ def draw_lsystem(t, axiom, rules, iterations, angle, length):
         elif char == "-":
             t.left(angle)
 
-elif char == "[":
+        elif char == "[":
             stack.append((t.position(), t.heading()))
         elif char == "]":
             position, heading = stack.pop()
